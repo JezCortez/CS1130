@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Number Operations</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+    <button onclick="location.href='index.html'">Home</button>
+    <button onclick="location.href='computations.html'">Conversion</button>
+    <button onclick="location.href='page3.html'">Nth Factorial</button>
+    <button onclick="location.href='page4.html'">Simple Payroll</button>
+    <button onclick="location.href='page5.html'">Income Tax Calculator</button>
+  </header>
+  
+  <h2>Number Operations</h2>
+  <label for="inputNumber">Enter an integer (n):</label>
+  <input type="number" id="inputNumber">
+  <br><br>
+  <button onclick="calculate()">Calculate</button>
+  <br><br>
+  <p id="factorialResult"></p>
+  <p id="sumResult"></p>
+  <p id="averageResult"></p>
+
+  <script>
+    function calculate() {
+      var n = parseInt(document.getElementById("inputNumber").value);
+      var factorial = 1;
+      var sum = 0;
+
+      // Calculate nth factorial using a while loop
+      var i = 1;
+      while (i <= n) {
+        factorial *= i;
+        i++;
+      }
+
+      // Calculate sum of the first n numbers using a do-while loop
+      i = 1;
+      do {
+        sum += i;
+        i++;
+      } while (i <= n);
+
+      // Calculate average of the first n numbers using a for loop
+      var average = 0;
+      for (i = 1; i <= n; i++) {
+        average += i;
+      }
+      average /= n;
+
+      // Display results
+      document.getElementById("factorialResult").innerText = "The factorial of " + n + " is: " + factorial;
+      document.getElementById("sumResult").innerText = "The sum of the first " + n + " numbers is: " + sum;
+      document.getElementById("averageResult").innerText = "The average of the first " + n + " numbers is: " + average.toFixed(2);
+    }
+  </script>
+</body>
+</html>
