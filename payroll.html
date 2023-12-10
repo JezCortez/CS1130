@@ -68,7 +68,7 @@
   
   <label for="deleteLineNumber">Delete Entry (Enter Line Number):</label>
   <input type="number" id="deleteLineNumber">
-  <button onclick="deleteEmployee()">Delete Employee</button>
+  <button onclick="confirmDelete()">Delete Employee</button>
 
   <table id="payrollTable">
     <tr>
@@ -81,6 +81,12 @@
       <th>Net Pay</th>
     </tr>
   </table>
+
+  <dialog id="deleteConfirmation">
+    <p>Are you sure you want to delete this employee entry?</p>
+    <button onclick="deleteEmployee()">Yes</button>
+    <button onclick="closeDeleteConfirmation()">No</button>
+  </dialog>
 
   <script>
     var payrollList = [];
@@ -107,16 +113,28 @@
       displayPayroll();
     }
 
+    function confirmDelete() {
+      var modal = document.getElementById("deleteConfirmation");
+      var deleteLineNumber = parseInt(document.getElementById("deleteLineNumber").value);
+      
+      if (deleteLineNumber > 0 && deleteLineNumber <= payrollList.length) {
+        modal.showModal();
+      } else {
+        alert("Invalid line number. Please enter a valid line number to delete.");
+      }
+    }
+
     function deleteEmployee() {
       var deleteLineNumber = parseInt(document.getElementById("deleteLineNumber").value);
       
       if (deleteLineNumber > 0 && deleteLineNumber <= payrollList.length) {
         payrollList.splice(deleteLineNumber - 1, 1);
         displayPayroll();
-      } else {
-        alert("Invalid line number. Please enter a valid line number to delete.");
+        closeDeleteConfirmation();
       }
     }
+
+    
 
     function displayPayroll() {
       var table = document.getElementById("payrollTable");
